@@ -1,0 +1,45 @@
+@import url(../node_modules/normalize.css/normalize.css)
+
+r{
+
+}
+
+:root{
+    
+}
+
+
+header{
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+    padding: 10px;
+}
+
+.main-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    justify-items: center;
+    margin: 0px 10vw;
+}
+
+.library-book{
+    background-color: grey;
+    border: 1px black solid;
+    padding: 10%;
+    border-radius: 10px;
+    width: 50%;
+}
+
+footer{
+    position: absolute;
+    bottom: 0;
+}
+
+.button-add{
+    display: flex;
+    justify-content: center;
+    margin: 10px 0px;
+    padding: 10px 0px;
+}
