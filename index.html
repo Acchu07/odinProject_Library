@@ -14,18 +14,35 @@
         <h1>Library</h1>
         <h2>Sign Up</h2>
     </header>
-    <div class="button-add"><button class="btn-add-book">Add A Book</button></div>
+    <div class="button-add">
+        <button class="btn-add-book">Add A Book</button>
+    </div>
     <div class="main-container">
         <div class="library-book">
             <h3>Author</h3>
             <p>Agatha Christie</p>
             <h3>Title</h3>
-            <p>Murder on the orient express</p>
+            <p>Murder On The Orient Express</p>
             <h3>Pages</h3>
             <p>300</p>
             <button>Read</button>
             <button>Remove</button>
-        </div>
+            </div>
+    </div>
+    <dialog>
+        <form action="#" method="post">
+            <!-- Need to add additional attribute validations to do later -->
+            <label for="Author-Name">Author Name</label>
+            <input type="text" id="Author-Name" required> 
+            <label for="Book-Name">Book Name</label>
+            <input type="text" id="Book-Name" >
+            <label for="Pages">No. of Pages</label>
+            <input type="text" id="Pages" >
+            <button>Read</button>
+            <button type="submit">Submit</button>
+            <button>Cancel</button>
+        </form>
+    </dialog>
     <footer>Odin Project</footer>
 </body>
 

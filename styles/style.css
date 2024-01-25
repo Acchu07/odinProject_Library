@@ -1,13 +1,4 @@
-@import url(../node_modules/normalize.css/normalize.css)
-
-r{
-
-}
-
-:root{
-    
-}
-
+@import url(../node_modules/normalize.css/normalize.css);
 
 header{
     display: flex;
@@ -43,3 +34,16 @@ footer{
     margin: 10px 0px;
     padding: 10px 0px;
 }
+
+button{
+    margin: 0px 10px;
+}
+
+dialog::backdrop{
+    backdrop-filter: blur(10px);
+}
+
+/* dialog{
+    width: 25vh;
+    height: 25vh;
+} */
