@@ -43,7 +43,6 @@ dialog::backdrop{
     backdrop-filter: blur(10px);
 }
 
-/* dialog{
-    width: 25vh;
-    height: 25vh;
-} */
+.sample-test{
+    background-color: green;
+}

@@ -5,17 +5,33 @@ const dialogPopUpModal = document.querySelector('dialog')
 const library = [];
 let pushArrayIndexValue = 0;
 
-function Book(author,title,pages){
+function Book(author,title,pages,bHasRead){
     this.author = author;
     this.title = title;
     this.pages = pages;
+    this.bHasRead = bHasRead;
 }
 
-// const newTitle = new Book("Conan Doyle","Hound of the Baskervilles", 327)
+function ReadBook(e){
+    if(!library[e.target.parentNode.dataset.indexNumber].bHasRead){
+        library[e.target.parentNode.dataset.indexNumber].bHasRead = true;
+        e.target.parentNode.classList.add("sample-test");
+        e.target.innerText = "Unread";
+        return;
+    }
+    library[e.target.parentNode.dataset.indexNumber].bHasRead = false;
+    e.target.parentNode.classList.remove("sample-test");
+    e.target.innerText = "Read";
+}
+
+// const newTitle = new Book("Sir Arthur Conan Doyle","Hound of the Baskervilles", 327)
+// console.log(newTitle);
+
 
 // Create a div and attach to the tree
 
 function createBookOnWebPage(object){
+
     //Create respective element and append
     const libraryBook = document.createElement("div");
     const bookAuthor = document.createElement("h3");
@@ -29,9 +45,9 @@ function createBookOnWebPage(object){
 
     libraryBook.dataset.indexNumber = pushArrayIndexValue;
     pushArrayIndexValue++;
-    // console.log(pushArrayIndexValue);
 
-    buttonRemove.addEventListener('click',(removeBook));
+    buttonRemove.addEventListener('click',removeBook);
+    buttonRead.addEventListener('click',ReadBook);
 
     libraryBook.classList.add("library-book");
     buttonRemove.classList.add("remove");
@@ -61,6 +77,11 @@ function createBookOnWebPage(object){
     //Append to Main Container as a child
     libraryBook.classList.add('library-book');
     mainContainer.appendChild(libraryBook);
+
+    if(object.bHasRead){
+        libraryBook.classList.add("sample-test")
+        buttonRead.innerText = "Unread";
+    }
 }
 
 
@@ -71,7 +92,7 @@ function addBookToLibrary(){
 }
 
 function unparentChildren(){
-    let mainParent = document.querySelector('.main-container');
+    const mainParent = document.querySelector('.main-container');
     while(mainParent.firstChild){
         mainParent.removeChild(mainParent.firstChild);
     }
@@ -85,8 +106,17 @@ addBookToLibrarybtn.addEventListener('click',()=>{
 
 
 
-let submitBtn = document.querySelector("button[type='submit']");
-let cancelBtn = document.querySelector("button[type='submit'] + button");
+const submitBtn = document.querySelector("button[type='submit']");
+const cancelBtn = document.querySelector("button[type='submit'] + button");
+const readBtn = document.querySelector("form > button");
+
+readBtn.addEventListener('click',(e)=>{
+    e.preventDefault();
+    const newBook = new Book(document.querySelector('#Author-Name').value,document.querySelector('#Book-Name').value,document.querySelector('#Pages').value,true);
+    library.push(newBook);
+    addBookToLibrary(newBook);
+    document.querySelector("form").reset();
+})
 
 cancelBtn.addEventListener('click',(e)=>{
     e.preventDefault();
@@ -97,7 +127,7 @@ cancelBtn.addEventListener('click',(e)=>{
 //Extract Data
 submitBtn.addEventListener('click',(e)=>{
     e.preventDefault();
-    const newBook = new Book(document.querySelector('#Author-Name').value,document.querySelector('#Book-Name').value,document.querySelector('#Pages').value);
+    const newBook = new Book(document.querySelector('#Author-Name').value,document.querySelector('#Book-Name').value,document.querySelector('#Pages').value,false);
     library.push(newBook);
     addBookToLibrary(newBook);
     document.querySelector("form").reset();
