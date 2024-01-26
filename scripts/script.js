@@ -13,8 +13,6 @@ function Book(author,title,pages){
 
 // const newTitle = new Book("Conan Doyle","Hound of the Baskervilles", 327)
 
-
-// how to display it not on console but on the webpage
 // Create a div and attach to the tree
 
 function createBookOnWebPage(object){
@@ -31,11 +29,9 @@ function createBookOnWebPage(object){
 
     libraryBook.dataset.indexNumber = pushArrayIndexValue;
     pushArrayIndexValue++;
-    console.log(pushArrayIndexValue);
+    // console.log(pushArrayIndexValue);
 
-    buttonRemove.addEventListener('click',(e)=>{
-        console.log(e.target.parentNode);
-    })
+    buttonRemove.addEventListener('click',(removeBook));
 
     libraryBook.classList.add("library-book");
     buttonRemove.classList.add("remove");
@@ -76,7 +72,6 @@ function addBookToLibrary(){
 
 function unparentChildren(){
     let mainParent = document.querySelector('.main-container');
-    console.log(mainParent);
     while(mainParent.firstChild){
         mainParent.removeChild(mainParent.firstChild);
     }
@@ -108,15 +103,9 @@ submitBtn.addEventListener('click',(e)=>{
     document.querySelector("form").reset();
 })
 
-// Remove book from array but how would i associate the remove button to an event - possible to make it a nodelist or do i need to create it 
-
-
-
-
-
-// To Do bugs
-
-
-// To figure out
-// why do i need an array cant i just unparent this directly? also the array will keep growing exponentially if everything is not shifted whenever an object is removed. 
-// Remove book from array but how would i associate the remove button so i  can trigger the event
+// Remove book from array 
+function removeBook(e){
+        let arrayIndexNumber = e.target.parentNode.dataset.indexNumber;
+        library.splice(arrayIndexNumber,1);
+        addBookToLibrary();        
+}
