@@ -3,6 +3,7 @@ const addBookToLibrarybtn = document.querySelector('.btn-add-book')
 const dialogPopUpModal = document.querySelector('dialog')
 
 const library = [];
+let pushArrayIndexValue = 0;
 
 function Book(author,title,pages){
     this.author = author;
@@ -10,8 +11,7 @@ function Book(author,title,pages){
     this.pages = pages;
 }
 
-const newTitle = new Book("Conan Doyle","Hound of the Baskervilles", 327)
-const newTitle2 = new Book("Agatha Christie","Black Coffee", 320)
+// const newTitle = new Book("Conan Doyle","Hound of the Baskervilles", 327)
 
 
 // how to display it not on console but on the webpage
@@ -28,6 +28,17 @@ function createBookOnWebPage(object){
     const bookPagesNumber = document.createElement("p");
     const buttonRead = document.createElement("button");
     const buttonRemove = document.createElement("button");
+
+    libraryBook.dataset.indexNumber = pushArrayIndexValue;
+    pushArrayIndexValue++;
+    console.log(pushArrayIndexValue);
+
+    buttonRemove.addEventListener('click',(e)=>{
+        console.log(e.target.parentNode);
+    })
+
+    libraryBook.classList.add("library-book");
+    buttonRemove.classList.add("remove");
 
     libraryBook.appendChild(bookAuthor);
     libraryBook.appendChild(bookAuthorName);
@@ -56,15 +67,20 @@ function createBookOnWebPage(object){
     mainContainer.appendChild(libraryBook);
 }
 
-library.push(newTitle);
-
 
 function addBookToLibrary(){
+    unparentChildren();
+    pushArrayIndexValue = 0;
     library.forEach(createBookOnWebPage);
-    
 }
 
-addBookToLibrary();
+function unparentChildren(){
+    let mainParent = document.querySelector('.main-container');
+    console.log(mainParent);
+    while(mainParent.firstChild){
+        mainParent.removeChild(mainParent.firstChild);
+    }
+}
 
 // Event response to Add Book Button
 
@@ -73,4 +89,34 @@ addBookToLibrarybtn.addEventListener('click',()=>{
 })
 
 
-//Extract Data from form how to do this
+
+let submitBtn = document.querySelector("button[type='submit']");
+let cancelBtn = document.querySelector("button[type='submit'] + button");
+
+cancelBtn.addEventListener('click',(e)=>{
+    e.preventDefault();
+    dialogPopUpModal.close();
+    document.querySelector("form").reset();
+})
+
+//Extract Data
+submitBtn.addEventListener('click',(e)=>{
+    e.preventDefault();
+    const newBook = new Book(document.querySelector('#Author-Name').value,document.querySelector('#Book-Name').value,document.querySelector('#Pages').value);
+    library.push(newBook);
+    addBookToLibrary(newBook);
+    document.querySelector("form").reset();
+})
+
+// Remove book from array but how would i associate the remove button to an event - possible to make it a nodelist or do i need to create it 
+
+
+
+
+
+// To Do bugs
+
+
+// To figure out
+// why do i need an array cant i just unparent this directly? also the array will keep growing exponentially if everything is not shifted whenever an object is removed. 
+// Remove book from array but how would i associate the remove button so i  can trigger the event
