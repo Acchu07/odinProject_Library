@@ -5,12 +5,21 @@ const dialogPopUpModal = document.querySelector('dialog')
 const library = [];
 let pushArrayIndexValue = 0;
 
-function Book(author,title,pages,bHasRead){
-    this.author = author;
-    this.title = title;
-    this.pages = pages;
-    this.bHasRead = bHasRead;
+class Book{
+    constructor(author,title,pages,bHasRead){
+        this.author = author;
+        this.title = title;
+        this.pages = pages;
+        this.bHasRead = bHasRead;
+    }
 }
+
+// function Book(author,title,pages,bHasRead){
+//     this.author = author;
+//     this.title = title;
+//     this.pages = pages;
+//     this.bHasRead = bHasRead;
+// }
 
 function ReadBook(e){
     if(!library[e.target.parentNode.dataset.indexNumber].bHasRead){
@@ -23,9 +32,6 @@ function ReadBook(e){
     e.target.parentNode.classList.remove("sample-test");
     e.target.innerText = "Read";
 }
-
-// const newTitle = new Book("Sir Arthur Conan Doyle","Hound of the Baskervilles", 327)
-// console.log(newTitle);
 
 
 // Create a div and attach to the tree
